@@ -1,0 +1,68 @@
+<div class="bg-default">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div id="main" class="container mx-auto">
+            <div class="row mb-3">
+                <div class="col-md-6 card mx-auto">
+                    <div class="card-header text-center">
+                        <h4><strong>JSON VALIDATOR</strong></h4>
+                    </div>
+                    <form [formGroup]="jsonForm" (ngSubmit)="onSubmit()" novalidate>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>JSON Input</label>
+                                <input type="text" formControlName="jsonInput" class="form-control" id="jsonInput">
+                            </div>
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-gradient-primary btn-block text-white">
+                                    <strong>Submit</strong>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 card mx-auto">
+                    <div class="container bg-white text-center">
+                        <form [formGroup]="customForm">
+                            <div class="card-body p-0" *ngFor="let qtn of entries; index as i">
+                                <!-- If Title or title -->
+                                <div class="form-header pt-1">
+                                    <div *ngIf="qtn[0] === 'Title' || qtn[0] === 'title'">
+                                        <h2>{{ qtn[1] }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body p-0" *ngFor="let qtn of entries; index as i">
+                                <div class="form-group form-row" *ngIf="qtn[0] !== 'Title' && qtn[0] !== 'title'">
+                                    <label class="mr-2">{{ qtn[1] }}</label>
+
+                                    <!-- If String or string -->
+                                    <div *ngIf="qtn[0] === 'String' || qtn[0] === 'string'">
+                                        <input type="text" class="form-control" formControlName="{{ i }}" required>
+                                    </div>
+
+                                    <!-- If Array or array -->
+                                    <div *ngIf="qtn[0] === 'Array' || qtn[0] === 'array'">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input"  formControlName="qtn[1]" value="" type="radio">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                            
+                            <div class="mt-4 mb-4" *ngIf="entries">
+                                <button type="submit" class="btn btn-gradient-primary btn-block text-white">
+                                    <strong>Submit</strong>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
