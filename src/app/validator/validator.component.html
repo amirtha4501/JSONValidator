@@ -1,7 +1,7 @@
 <div class="bg-default">
     <div class="row h-100 justify-content-center align-items-center">
         <div id="main" class="container mx-auto">
-            <div class="row mb-3">
+            <div class="row">
                 <div class="col-md-6 card mx-auto">
                     <div class="card-header text-center">
                         <h4><strong>JSON VALIDATOR</strong></h4>
@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>JSON Input</label>
-                                <input type="text" formControlName="jsonInput" class="form-control" id="jsonInput">
+                                <input type="text" formControlName="jsonInput" class="form-control" id="jsonInput" required>
                             </div>
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-gradient-primary btn-block text-white">
@@ -22,10 +22,10 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 card mx-auto">
+            <div class="row" *ngIf="submitted">
+                <div class="col-md-6 card mx-auto mt-4">
                     <div class="container bg-white text-center">
-                        <form [formGroup]="customForm">
+                        <form [formGroup]="customForm"(ngSubmit)="onCustomSubmit()" novalidate>
                             <div class="card-body p-0" *ngFor="let qtn of entries; index as i">
                                 <!-- If Title or title -->
                                 <div class="form-header pt-1">
@@ -47,7 +47,7 @@
                                     <!-- If Array or array -->
                                     <div *ngIf="qtn[0] === 'Array' || qtn[0] === 'array'">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input"  formControlName="qtn[1]" value="" type="radio">
+                                            <input class="form-check-input"  formControlName="qtn[1]" value="qtn[1]" type="radio">
                                         </div>
                                     </div>
                                 </div>

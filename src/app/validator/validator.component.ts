@@ -13,6 +13,8 @@ export class ValidatorComponent implements OnInit {
     customForm;
     detail: {};
     entries;
+    customFormDetail;
+    submitted: boolean = false;
 
     constructor(
         private router: Router,
@@ -50,15 +52,21 @@ export class ValidatorComponent implements OnInit {
 
     onSubmit() {
         this.detail = this.jsonForm.value;
+        
         try {
             var value = JSON.parse(this.detail['jsonInput']);
             console.log(value);
             this.calculator(value);
+            this.submitted = true;
         } catch (err) {
             alert(err);
         }
         this.createCustomForm();
     }
 
+    onCustomSubmit() {
+        this.customFormDetail = this.customForm.value;
+        localStorage.setItem("customFormValue", this.customFormDetail);
+    }
 
 }
